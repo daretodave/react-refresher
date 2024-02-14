@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useState, Fragment} from "react";
 
 import {CORE_CONCEPTS, EXAMPLES} from "./data";
 import Header from "./components/Header/Header";
@@ -16,7 +16,7 @@ function App() {
     }
 
     return (
-        <div>
+        <>
             <Header/>
             <main>
                 <section id="core-concepts">
@@ -47,7 +47,7 @@ function App() {
                     </div>}
                 </section>
             </main>
-        </div>
+        </>
     );
 }
 
