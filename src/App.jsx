@@ -7,12 +7,14 @@ import TabButton from "./components/TabButton/TabButton";
 
 function App() {
 
-    const [selectedTab, setSelectedTab] = useState('components');
+    const [selectedTab, setSelectedTab] = useState();
+
     function handleTabSelect(tabName) {
         console.log('Tab selected =>', tabName);
 
         setSelectedTab(tabName);
     }
+
     return (
         <div>
             <Header/>
@@ -26,18 +28,23 @@ function App() {
                 <section id="examples">
                     <h2>Examples</h2>
                     <menu>
-                        <TabButton onSelect={() => handleTabSelect('components')}>Components</TabButton>
-                        <TabButton onSelect={() => handleTabSelect('jsx')}>JSX</TabButton>
-                        <TabButton onSelect={() => handleTabSelect('props')}>Props</TabButton>
-                        <TabButton onSelect={() => handleTabSelect('state')}>State</TabButton>
+                        <TabButton isSelected={selectedTab === "components"}
+                                   onSelect={() => handleTabSelect('components')}>Components</TabButton>
+                        <TabButton isSelected={selectedTab === "jsx"}
+                                   onSelect={() => handleTabSelect('jsx')}>JSX</TabButton>
+                        <TabButton isSelected={selectedTab === "props"}
+                                   onSelect={() => handleTabSelect('props')}>Props</TabButton>
+                        <TabButton isSelected={selectedTab === "state"}
+                                   onSelect={() => handleTabSelect('state')}>State</TabButton>
                     </menu>
-                    <div id="tab-content">
+                    {!selectedTab && <p>Select a tab to learn more!</p>}
+                    {selectedTab && <div id="tab-content">
                         <h3>{EXAMPLES[selectedTab].title}</h3>
                         <p>{EXAMPLES[selectedTab].description}</p>
                         <pre>
                             <code>{EXAMPLES[selectedTab].code}</code>
                         </pre>
-                    </div>
+                    </div>}
                 </section>
             </main>
         </div>
